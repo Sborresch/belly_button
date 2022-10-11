@@ -1,0 +1,68 @@
+Why we use Plotly (a JavaScript functionality) to communicate to stakeholders with visualizations versus Matplotlib in Jupiter Notebook becasue stakeholders would need Python downloaded locally on their computer to see said visualizations.
+
+Prompt: Rosa, a biological researcher, in a microbiology laboratory. SHe is studying bacteria that synthesis their proteins to taste like beef. Improbable Beef is a food start up company is looking for the undocumented perfect bacteria that tastes like beef. Rosa feels like she can provide this perfect bacteria by studying belly button bacteria. Rosa wants to build a dashboard for test subjects to access their belly button bacterial analysis based on their anonymous ID number.
+
+CDN = Content Delivery Network - provides links to downloadable resources such as Plotly
+
+Code to transform data in JS:
+    map() - applies a transformation to each element in an array
+        - you can capitalize all words in a list --- varaiable.map(variable => variable.toUpperCase())
+        - you can square a number --- variable.map(variable =>variable*variable)
+
+    filter() - accepts another function as its parameter, like map()
+        - you can filter out all even numbers in an array --- variable.filter(variable => variable % 2 ==0)
+
+    sort() - like above methods
+        - example:
+        var familyAge = [3,2,39,37,9];
+        sortedAge = familyAge.sort((a,b) => b-a);
+
+        b-a = decending order
+        a-b = ascending order
+
+    slice() - like above methods. It allows code to select a subset of the data.. hense slice
+        - example:
+        var integers = [0,1,2,3,4,5];
+        var slice1 = integers.slice(0,2);
+
+        the output would be = 0, 1
+        because the array starts at 0
+        So (0,) says what index number to start at
+        And (,2) says what index number to stop right before
+
+        - example: to slice the end of an array you can omit the second argument
+        var words = ['seal', 'dog', 'scorpion', 'orangutan', 'salamander'];
+        words.slice(3, );
+
+        output should be 'seal', 'dog', 'scorpion'
+
+parseInt in code = converts strings to integers
+
+D3 is a data visualization library
+D3.json() method will allow to read external JSON files in Plotly and other external applies
+
+
+Syntax for the spaceX.js file that I removed:
+// Retrieve details only for Vandenberg Air Force Base
+d3.json(url).then(spaceXResults =>
+console.log(spaceXResults[0]));
+
+// Retrieve the full_name of the Vandenberg Air Force Base
+d3.json(url).then(spaceXResults => console.log(spaceXResults[0].full_name));
+
+// Retrieve latitude of Vandenberg Airforce Base
+d3.json(url).then(spaceXResults =>
+console.log(spaceXResults[0].location.latitude));
+
+OTU = operational taxonomic unit
+id = key identifier/id number
+otu_ids = array of the id number and all the bacteria in a belly
+otu_label = groups of bacterial species
+sample_values = array contains the corresponding species name for each bacterial id number
+
+Object.entries() method allows access to both a object's keys and values and returns each key-value pair as an array
+forEach() method allows access to each element of an array
+
+On the webpage:  Roza is now ready to create a dynamic chart in Plotly. She'll now create a dynamic line chart: there will be a dropdown menu in the browser with two options. When an option is selected, the browser will display the graph for the dataset associated with that option.
+
+
