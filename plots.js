@@ -10,12 +10,37 @@ function init() {
         .text(sample)
         .property("value", sample);
     });
-})}
+    var firstSample = sampleNames[0];
+    buildCharts(firstSample);
+    buildMetadata(firstSample);
+
+  })
+}
+
+init();
+
+function optionChanged(newSample) {
+  buildMetadata(newSample);
+  buildCharts(newSample);
+}
+
+function buildMetadata(sample) {
+  d3.json("samples.json").then((data) => {
+    var metadata = data.metadata;
+    var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
+    var result = resultArray[0];
+    var PANEL = d3.select("#sample-metadata");
+
+    PANEL.html("");
+    PANEL.append("h6").text(result.location);
+  });
+}
 
 
 function updatePlotly() {
   var dropdownMenu = d3.select("#dropdownMenu");
   var dataset = dropdownMenu.property("value");
+  
 
   var xData = [1, 2, 3, 4, 5];
   var yData = [];
@@ -33,8 +58,6 @@ function updatePlotly() {
     y: [yData],
   };
   Plotly.restyle("plot", trace);
-};
-
-init();
+}
 
 
