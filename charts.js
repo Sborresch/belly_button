@@ -60,26 +60,29 @@ function buildCharts(sample) {
     console.log(data);
 
     // 3. Create a variable that holds the samples array. 
-      allsamples = data.metadata; 
+    allsamples = data.samples 
 
     // 4. Create a variable that filters the samples for the object with the desired sample number.
-      filterdsamples = allsamples.filter(element => element.id);
+    filteredsamples = allsamples.filter(element => element.id === sample);
     
     //  5. Create a variable that holds the first sample in the array.
-      firstPerson = data.metadata[0];
-      Object.entries(firstPerson).forEach(([key, value]) =>
+    firstPerson = filteredsamples[0]
+    console.log(firstPerson)
+    
+    // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
+    otu_ids_value = data.otu_ids
+    otu_labels_value = data.labels_value
+    sample_variable_value = data.sample_variable
+
+    Object.entries(firstPerson).forEach(([key, value]) =>
         {console.log(key + ': ' + value);});
      });
-
-    // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
-     selectedvalues = firstPerson.forEach(([first, second]) => console.log(first
-      + ": " + second));
 
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
     //  so the otu_ids with the most bacteria are last. 
 
-    var yticks = selectedvalues.map(otu_ids).slice(0,9).sort((a,b) => b-a);
+    var yticks = firstPerson.map(otu_ids).slice(0,9).sort((a,b) => b-a);
 
     // 8. Create the trace for the bar chart. 
     var barData = {
@@ -87,7 +90,8 @@ function buildCharts(sample) {
       y: ["sample_values"],
       type: "bar"
      };
-    // 9. Create the layout for the bar chart. 
+    
+     // 9. Create the layout for the bar chart. 
     var barLayout = {
      title: "Top 10 Bacteria Cultures Found"
     };
