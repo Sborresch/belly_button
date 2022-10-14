@@ -102,12 +102,16 @@ function buildCharts(sample) {
 
     // 1. Create the trace for the bubble chart.
     var bubbleData = [{
-      x: sample_value.slice(0,9).reverse(),
-      y: yticks,
-      type: "myDiv",
-      text: otu_labels_value.slice(0,9).reverse(),
-      mode: 'markers'
-      }];
+      x: otu_ids_value,
+      y: sample_value,
+      text: otu_labels_value,
+      mode: "marker",
+      marker: {
+        size: sample_value, 
+        color: otu_ids_value, 
+        colorscale: "agsunsets"
+      }
+    }];
     
     // 2. Create the layout for the bubble chart.
     var bubbleLayout = {
@@ -118,6 +122,6 @@ function buildCharts(sample) {
       };
     
     // 3. Use Plotly to plot the data with the layout.
-    Plotly.newPlot("myDiv", bubbleData, bubbleLayout); 
+    Plotly.newPlot("bubble", bubbleData, bubbleLayout); 
   
 })}
