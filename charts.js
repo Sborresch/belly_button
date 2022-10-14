@@ -71,8 +71,8 @@ function buildCharts(sample) {
     
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
     var otu_ids_value = firstPerson.otu_ids
-    var otu_labels_value = firstPerson.labels_value
-    var sample_value = firstPerson.sample_variable
+    var otu_labels_value = firstPerson.otu_labels
+    var sample_value = firstPerson.sample_values
 
     Object.entries(firstPerson).forEach(([key, value]) =>
         {console.log(key + ': ' + value);});
@@ -84,18 +84,20 @@ function buildCharts(sample) {
     var yticks = otu_ids_value.map(element => "OTU ${element}").slice(0,9).reverse();
 
     // 8. Create the trace for the bar chart. 
-    var barData = {
-      x: [otu_labels_value, otu_labels_value],
-      y: [yticks],
-      type: "bar"
-     };
+    var barData = [{
+      x: sample_value.slice(0,9).reverse(),
+      y: yticks,
+      type: "bar",
+      orientation: "h",
+      text: otu_labels_value.slice(0,9).reverse()
+      }];
     
      // 9. Create the layout for the bar chart. 
     var barLayout = {
      title: "Top 10 Bacteria Cultures Found"
-    };
+      };
 
     // 10. Use Plotly to plot the data with the layout. 
-    Plotly.newPlot("plotArea", barData, barLayout);
+    Plotly.newPlot("bar", barData, barLayout);
   
 })}
