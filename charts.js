@@ -66,7 +66,7 @@ function buildCharts(sample) {
     var filteredsamples = allsamples.filter(element => element.id === sample);
     
     // 1(3). Create a variable that filters the metadata array for the object with the desired sample number.
-    var filteredMeta = allsamples.filters(element => element.id === sample);
+    var filteredMeta = data.metadata.filter(element => element.id == sample);
 
     //  5. Create a variable that holds the first sample in the array.
     var firstPerson = filteredsamples[0]
@@ -83,7 +83,7 @@ function buildCharts(sample) {
         {console.log(key + ': ' + value);});
 
     // 3(3). Create a variable that holds the washing frequency.
-    var washingFreq = firstMeta.wfreq
+    var washingFreq = parseFloat(firstMeta.wfreq)
 
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
@@ -142,6 +142,7 @@ function buildCharts(sample) {
           gauge: {
             axis: {range: [null, 10], tickwidth: 1, tickcolor: "black"},
             bgcolor: "white",
+            bar: {color: "black"},
             steps: [
               {range: [0,2], color: "red"},
               {range: [2,4], color: "orange"},
@@ -153,10 +154,10 @@ function buildCharts(sample) {
         
     // 5(3). Create the layout for the gauge chart.
         var gaugeLayout = { 
-         title: "Belly Button Washing Frequency",
-         height: 500,
-         width: 600,
-         margin: {t:0,b:0}
+         title: {text: "Belly Button Washing Frequency", font: "bold"},
+         height: 400,
+         width: 400,
+         margin: {t:100,b:100}
         };
     
     // 6(3). Use Plotly to plot the gauge data and layout.
