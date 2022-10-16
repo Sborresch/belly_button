@@ -66,12 +66,13 @@ function buildCharts(sample) {
     var filteredsamples = allsamples.filter(element => element.id === sample);
     
     // 1(3). Create a variable that filters the metadata array for the object with the desired sample number.
-  
+    var filteredMeta = allsamples.filters(element => element.id === sample);
 
     //  5. Create a variable that holds the first sample in the array.
     var firstPerson = filteredsamples[0]
 
     // 2(3). Create a variable that holds the first sample in the metadata array.
+    var firstMeta = filteredMeta[0]
 
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
     var otu_ids_value = firstPerson.otu_ids
@@ -82,7 +83,7 @@ function buildCharts(sample) {
         {console.log(key + ': ' + value);});
 
     // 3(3). Create a variable that holds the washing frequency.
-
+    var washingFreq = firstMeta.wfreq
 
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
@@ -126,23 +127,39 @@ function buildCharts(sample) {
       xaxis: {title: "OTU ID"},
       height: 600,
       width: 1200,
-      hovermod: "closest"
+      hovermode: "closest"
       };
     
     // 3(2). Use Plotly to plot the data with the layout.
     Plotly.newPlot("bubble", bubbleData, bubbleLayout); 
 
     // 4(3). Create the trace for the gauge chart.
-        var gaugeData = [
-     
-        ];
+        var gaugeData = [{
+          value: washingFreq,
+          title: {text: "Scrubs per Week"},
+          type: "indicator",
+          mode: "gauge+number",
+          gauge: {
+            axis: {range: [null, 10], tickwidth: 1, tickcolor: "black"},
+            bgcolor: "white",
+            steps: [
+              {range: [0,2], color: "red"},
+              {range: [2,4], color: "orange"},
+              {range: [4,6], color:"yellow"},
+              {range: [6,8], color: "yellowgreen"},
+              {range: [8,10], color: "forestgreen"}
+            ]}
+        }];
         
     // 5(3). Create the layout for the gauge chart.
         var gaugeLayout = { 
-         
+         title: "Belly Button Washing Frequency",
+         height: 500,
+         width: 600,
+         margin: {t:0,b:0}
         };
     
     // 6(3). Use Plotly to plot the gauge data and layout.
-        Plotly.newPlot();
+        Plotly.newPlot("gauge", gaugeData, gaugeLayout);
   
 })}
